@@ -1,3 +1,4 @@
+from pickle import NONE
 import numpy as np
 
 class mat_multiple():
@@ -36,6 +37,21 @@ class mat_multiple():
 
     # the more effecient way. Like to keep easiest way in mind 
     # if I need to use the method in the future
-    def easyway(self,A,X):
+    def easyway_matvect(self,A,X):
         return A.dot(X)
 
+
+    # functions returns the output of a transform given the result of unit vectors 
+    # being put into the transform
+    # unit vector results will be input as array of columns
+    def unit_vector_transform_output(self,unit_vec_result,trans_input):
+
+        if (np.shape(unit_vec_result)[1] != len(trans_input)):
+            print("Error")
+        
+        out = np.zeros((1,len(trans_input)))
+        for i in range(0,np.shape(unit_vec_result)[1]):
+            out[i] = self.mat_vect(unit_vec_result[i],trans_input[i])
+
+        out = np.transpose(out)
+        return out
