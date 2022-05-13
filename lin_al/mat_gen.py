@@ -77,6 +77,7 @@ class mat_gen():
                         if i >= j:
                             mat[i][j] = 0
 
+        return mat
 
     def matToLower(self,mat,mat_type = 'std'):
 
@@ -109,3 +110,6 @@ class mat_gen():
                     elif mat_type == 'strict':
                         if i <= j:
                             mat[i][j] = 0
+
+        return mat
+        
