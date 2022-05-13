@@ -45,4 +45,67 @@ class mat_gen():
                 for j in range(0,shape[1]):
                     out[i][j] = 1
 
-    
+    def matToUpper(self,mat,mat_type = 'std'):
+
+        # determines shape of matrix
+        shape = np.shape(mat)
+
+
+        if shape[0] != shape[1]:
+            # test for squareness
+            print("Error: Identity matrix must be square")
+        elif mat_type != 'std' or 'id' or 'strict':
+            # handles invalid mat_type input
+            print("Error: Invalid mat_type. Must equal 'std'(default option), 'id', or 'strict'")
+        else:
+            # runs function if sqaure
+            for i in range(0,shape[0]):
+                for j in range(0,shape[0]):
+                    
+                    # handles normal upper tri matrix type
+                    if mat_type == 'std':
+                        if i > j:
+                            mat[i][j] = 0
+                    # handles id upper tri
+                    elif mat_type == 'id':
+                        if i > j:
+                            mat[i][j] = 0
+                        elif i == j:
+                            mat[i][j] = 1
+                    # handles strict upper
+                    elif mat_type == 'strict':
+                        if i >= j:
+                            mat[i][j] = 0
+
+
+    def matToLower(self,mat,mat_type = 'std'):
+
+        # determines shape of matrix
+        shape = np.shape(mat)
+
+
+        if shape[0] != shape[1]:
+            # test for squareness
+            print("Error: Identity matrix must be square")
+        elif mat_type != 'std' or 'id' or 'strict':
+            # handles invalid mat_type input
+            print("Error: Invalid mat_type. Must equal 'std'(default option), 'id', or 'strict'")
+        else:
+            # runs function if sqaure
+            for i in range(0,shape[0]):
+                for j in range(0,shape[0]):
+                    
+                    # handles normal upper tri matrix type
+                    if mat_type == 'std':
+                        if i < j:
+                            mat[i][j] = 0
+                    # handles id upper tri
+                    elif mat_type == 'id':
+                        if i < j:
+                            mat[i][j] = 0
+                        elif i == j:
+                            mat[i][j] = 1
+                    # handles strict upper
+                    elif mat_type == 'strict':
+                        if i <= j:
+                            mat[i][j] = 0
