@@ -1,4 +1,4 @@
-from ctypes.wintypes import FLOAT
+from ctypes.wintypes import FLOAT, INT
 import numpy as np
 import random as rd
 
@@ -20,19 +20,21 @@ class mat_gen():
         return out
 
 
-    def random(self,n,m,num_type = FLOAT, high = 10,low = -10):
-        out = np.zeros(n,m)
-
+    def random(self,n,m,num_type = float, high = 10,low = -10):
+        out = np.zeros((n,m))
+        
         for i in range(0,n):
             for j in range(0,m):
-                if num_type == 'int':
+                if num_type == int:
                     out[i][j] = rd.randint(low,high) 
-                elif num_type == 'float':
-                    sign = np.randint(-1,1)
-                    out[i][j] = rd.random() * high * sign
+                elif num_type == float:
+                    sign = rd.randint(-1E7,1E7)
+                    out[i][j] = rd.random() * high * sign / np.abs(sign)
                 else:
-                    sign = np.randint(-1,1)
-                    out[i][j] = rd.random() * high * sign
+                    sign = rd.randint(-100,100)
+                    out[i][j] = rd.random() * high * sign / np.abs(sign)
+
+        return out
 
     def matToId(self,mat):
         shape = np.shape(mat)
@@ -46,7 +48,7 @@ class mat_gen():
                     out[i][j] = 1
 
     def matToUpper(self,mat,mat_type = 'std'):
-
+        print(mat_type)
         # determines shape of matrix
         shape = np.shape(mat)
 
@@ -54,9 +56,10 @@ class mat_gen():
         if shape[0] != shape[1]:
             # test for squareness
             print("Error: Identity matrix must be square")
-        elif mat_type != 'std' or 'id' or 'strict':
+        elif mat_type not in  {'id', 'strict', 'std'}:
             # handles invalid mat_type input
             print("Error: Invalid mat_type. Must equal 'std'(default option), 'id', or 'strict'")
+            
         else:
             # runs function if sqaure
             for i in range(0,shape[0]):
@@ -80,7 +83,7 @@ class mat_gen():
         return mat
 
     def matToLower(self,mat,mat_type = 'std'):
-
+        print(mat_type)
         # determines shape of matrix
         shape = np.shape(mat)
 
@@ -88,7 +91,7 @@ class mat_gen():
         if shape[0] != shape[1]:
             # test for squareness
             print("Error: Identity matrix must be square")
-        elif mat_type != 'std' or 'id' or 'strict':
+        elif mat_type not in  {'id', 'strict', 'std'}:
             # handles invalid mat_type input
             print("Error: Invalid mat_type. Must equal 'std'(default option), 'id', or 'strict'")
         else:
@@ -112,4 +115,11 @@ class mat_gen():
                             mat[i][j] = 0
 
         return mat
-        
+
+
+mg = mat_gen()
+
+M = mg.random(5,5)
+
+u = mg.matToLower(M,'strict')
+print(u)
