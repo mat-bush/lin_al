@@ -117,9 +117,3 @@ class mat_gen():
         return mat
 
 
-mg = mat_gen()
-
-M = mg.random(5,5)
-
-u = mg.matToLower(M,'strict')
-print(u)
